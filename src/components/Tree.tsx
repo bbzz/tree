@@ -11,16 +11,19 @@ const treeNode = defineComponent({
         title: '',
         children: [{}]
       }
+    },
+    index: {
+      type: Number,
+      default: 0
     }
   },
   emits: ['enter'],
   setup(props, { emit }) {
-    const handleDelet = (item, e) => {
-      console.log(item, e.key);
+    const handleDelet = (e, item, index) => {
+      console.log(e, e.key);
       if (e.key === 'Enter') {
         // 添加子元素
-        console.log('Enter');
-        emit('enter');
+        emit('enter', index, e.shiftKey);
       }
       if (e.key === 'Tab') {
         console.log('Tab');
@@ -36,8 +39,8 @@ const treeNode = defineComponent({
       }
     };
 
-    const handleEnter = () => {
-      props.data.children?.push({
+    const handleEnter = (index, before) => {
+      props.data.children?.splice(before ? index : index + 1, 0, {
         title: '',
         children: []
       });
@@ -53,14 +56,13 @@ const treeNode = defineComponent({
     return () => (
       <div class="node">
         <div class="root">
-          <input v-model={props.data.title} onKeydown={() => handleDelet(props.data, event)} />
-          {/* <div {...{ onKeyup_enter: handleDelet, onClick: handleDelet }}>{props.data.title}</div> */}
+          <input v-model={props.data.title} onKeydown={() => handleDelet(event, props.data, props.index)} />
         </div>
         {props.data.children && props.data.children.length ? (
           <ul class="leaf">
-            {props.data.children?.map((item) => (
+            {props.data.children?.map((item, index: number) => (
               <li>
-                <treeNode data={item} onEnter={handleEnter} />
+                <treeNode data={item} index={index} onEnter={handleEnter} />
               </li>
             ))}
           </ul>

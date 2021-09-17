@@ -6,12 +6,29 @@ const data = ref(treeData);
 const msg = ref('TS + Vue3 + Vite2');
 
 if (localStorage.getItem('__knowData')) {
-  data.value = JSON.parse(localStorage.getItem('__knowData'));
+  const localData = JSON.parse(localStorage.getItem('__knowData'));
+  localData.editTime > treeData.editTime;
+  data.value = localData;
 }
 const timer = setInterval(() => {
-  console.log(data.value);
+  console.info('自动保存到本地', Date.now());
+  data.value.editTime = Date.now();
   localStorage.setItem('__knowData', JSON.stringify(data.value));
-}, 5000);
+}, 10000);
+
+window.addEventListener(
+  'keydown',
+  function (e: KeyboardEvent) {
+    if (e.keyCode == 83 && (navigator.platform.match('Mac') ? e.metaKey : e.ctrlKey)) {
+      e.preventDefault();
+      data.value.editTime = Date.now();
+      localStorage.setItem('__knowData', JSON.stringify(data.value));
+      // Process event...
+      alert('保存成功');
+    }
+  },
+  false
+);
 
 export default () => (
   <div>

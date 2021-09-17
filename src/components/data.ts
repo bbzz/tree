@@ -1,6 +1,7 @@
 export default {
   id: '123123',
   title: '前端工程师',
+  editTime: 0,
   children: [
     { id: '', title: '语言精粹' },
     { id: '', title: '计算机基础' },
