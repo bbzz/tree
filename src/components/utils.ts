@@ -1,16 +1,20 @@
-// 生成guid
+// 基于base62编码生成14位的ID字符串
+// 优点：短/按时间序/双击可全选/唯一性足够安全
 export function guid() {
-  let s: any[] = [];
-  let hexDigits = '0123456789abcdef';
-  for (let i = 0; i < 36; i++) {
-    s[i] = s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+  let ret = '';
+  let ms = new Date().getTime();
+  ret += base62encode(ms, 8); // 6923年循环一次
+  ret += base62encode(Math.ceil(Math.random() * 62 ** 6), 6); // 冲突概率为每毫秒568亿分之一
+  return ret;
+}
+let codeStr = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+function base62encode(v: number, n: number) {
+  let ret = '';
+  for (let i = 0; i < n; i++) {
+    ret = codeStr[v % codeStr.length] + ret;
+    v = Math.floor(v / codeStr.length);
   }
-  s[14] = '4'; // bits 12-15 of the time_hi_and_version field to 0010
-  s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
-  s[8] = s[13] = s[18] = s[23] = '-';
-
-  let guid = s.join('');
-  return guid;
+  return ret;
 }
 
 export function gTreeNode() {

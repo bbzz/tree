@@ -1,5 +1,5 @@
 import { gTreeNode } from './utils';
-import { ref, defineComponent, onMounted, PropType } from 'vue';
+import { defineComponent, onMounted, PropType } from 'vue';
 import className from '@/assets/app.module.css';
 import './index.css';
 interface ITreeData {
@@ -13,16 +13,14 @@ const treeNode = defineComponent({
   props: {
     data: {
       type: Object as PropType<ITreeData>,
-      default: {
-        title: '',
-        children: []
-      }
+      required: true
     },
     index: {
       type: Number,
       default: 0
     }
   },
+  emits: ['insertSiblingNode'],
   directives: {
     focus: {
       // 指令的定义
@@ -31,16 +29,15 @@ const treeNode = defineComponent({
       }
     }
   },
-  emits: ['enter'],
+
   setup(props, { emit }) {
-    const handleAction = (e: any, item: ITreeData, index: number) => {
+    const handleKeyDown = (e: KeyboardEvent, item: ITreeData, index: number) => {
       if (e.key === 'Enter') {
-        // 添加子元素
-        emit('enter', index, e.shiftKey);
+        const before = e.shiftKey;
+        emit('insertSiblingNode', index, before);
       }
       if (e.key === 'Tab') {
-        e.target.blur();
-        console.log('Tab');
+        (e.target as HTMLInputElement).blur();
         if (!item.children) {
           item.children = [];
         }
@@ -50,7 +47,7 @@ const treeNode = defineComponent({
       }
     };
 
-    const handleEnter = (index: number, before: boolean) => {
+    const insertSiblingNode = (index: number, before: boolean) => {
       props.data.children?.splice(before ? index : index + 1, 0, gTreeNode());
     };
 
@@ -64,13 +61,13 @@ const treeNode = defineComponent({
     return () => (
       <div class="node">
         <div class="root">
-          <input v-model={props.data.title} onKeydown={() => handleAction(event, props.data, props.index)} v-focus />
+          <input v-model={props.data.title} onKeydown={(event) => handleKeyDown(event, props.data, props.index)} v-focus />
         </div>
         {props.data.children && props.data.children.length ? (
           <ul class={['leaf', { one: props.data.children.length === 1 }]}>
-            {props.data.children?.map((item: ITreeData, index: number) => (
+            {props.data.children?.map((item: ITreeData, index) => (
               <li key={item.id}>
-                <treeNode data={item} index={index} onEnter={handleEnter} />
+                <treeNode data={item} index={index} onInsertSiblingNode={insertSiblingNode} />
               </li>
             ))}
           </ul>

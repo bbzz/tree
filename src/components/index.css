@@ -1,8 +1,4 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-:root {
+#app {
   --lineCorder: #333;
   --borderColor: #999;
   --nodeLeft: 10px;
@@ -44,15 +40,6 @@
 }
 .leaf li + li {
   margin-top: 10px;
-}
-.leaf li::before {
-  /* content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: calc(var(--nodeRight) * -1);
-  width: var(--nodeRight);
-  border-left: 1px solid var(--lineCorder); */
 }
 .leaf li::before {
   content: '';
