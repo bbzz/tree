@@ -5,6 +5,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/tree/',
   esbuild: {
     jsxFactory: 'h',
     jsxFragment: 'Fragment'
