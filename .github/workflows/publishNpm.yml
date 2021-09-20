@@ -22,4 +22,5 @@ jobs:
           cd ./components
           cd ./Tree
           npm version patch
+          npm config set registry http://registry.npmjs.org
           npm publish
