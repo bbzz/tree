@@ -1,6 +1,6 @@
 {
   "name": "knowledge-tree",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Vue3 TSX version Input mind map (knowledge tree) editor，基于input版本的知识树编辑器，Vue3 组件",
   "main": "index.tsx",
   "keywords": [
@@ -14,7 +14,7 @@
     "type": "git",
     "url": "https://github.com/bbzz/tree"
   },
-  "homepage": "https://github.com/bbzz/tree",
+  "homepage": "https://bbzz.github.io/tree/",
   "author": "yoja",
   "license": "ISC"
 }
