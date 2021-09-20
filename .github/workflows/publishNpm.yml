@@ -16,6 +16,8 @@ jobs:
       - name: Release
         run: |
           cd ./src
+          cd ./components
+          cd ./Tree
           npm version patch
           npm publish
         env:
