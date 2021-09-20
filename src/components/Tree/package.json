@@ -11,7 +11,7 @@
     "tsx"
   ],
   "publishConfig": {
-    "registry": "https://npm.registry.github.com"
+    "registry": "https://registry.npmjs.org"
   },
   "repository": {
     "type": "git",
