@@ -3,24 +3,18 @@ on:
   push:
     branches: [master]
 jobs:
-  check-bats-version:
+  publish:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [12]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
+          node-version: 12
+      - run: |
           cd ./src
           cd ./components
           cd ./Tree
           npm version patch
-          npm config set registry https://registry.npmjs.org
-          npm publish
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
