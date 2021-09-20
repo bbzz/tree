@@ -1,6 +1,6 @@
 import { ref, onMounted, onBeforeMount } from 'vue';
 import Tree from '@/components/Tree';
-import treeData from './components/data';
+import treeData from './data';
 import classes from './assets/app.module.css';
 
 export default {

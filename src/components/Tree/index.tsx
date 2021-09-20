@@ -1,6 +1,5 @@
 import { gTreeNode } from './utils';
-import { defineComponent, onMounted, PropType } from 'vue';
-import className from '@/assets/app.module.css';
+import { defineComponent, PropType } from 'vue';
 import './index.css';
 interface ITreeData {
   id: string;
@@ -50,13 +49,6 @@ const treeNode = defineComponent({
     const insertSiblingNode = (index: number, before: boolean) => {
       props.data.children?.splice(before ? index : index + 1, 0, gTreeNode());
     };
-
-    onMounted(() => {
-      const vm = document.getElementById('title');
-      if (vm) {
-        vm.className = className['color-theme'];
-      }
-    });
 
     return () => (
       <div class="node">

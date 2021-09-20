@@ -1,9 +1,8 @@
 {
-  "name": "code_run_editer",
-  "version": "0.0.0",
+  "name": "knowledge_tree_editer",
+  "version": "0.0.1",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview"
   },
   "dependencies": {
