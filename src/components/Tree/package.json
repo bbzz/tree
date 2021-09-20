@@ -1,6 +1,6 @@
 {
   "name": "knowledge-tree",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Vue3 TSX version Input mind map (knowledge tree) editor，基于input版本的知识树编辑器，Vue3 组件",
   "main": "index.tsx",
   "keywords": [
@@ -8,11 +8,9 @@
     "mind",
     "knowledge",
     "vue3",
-    "tsx"
+    "tsx",
+    "知识树"
   ],
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/:_authToken=$NPM_TOKEN"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/bbzz/tree"

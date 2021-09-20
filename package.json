@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite",
     "serve": "vite preview",
-    "build": "vite build"
+    "build": "vite build",
+    "publish": "cd ./src/components/Tree && npm version patch && npm publish"
   },
   "dependencies": {
     "vue": "^3.2.6"
