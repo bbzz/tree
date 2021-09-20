@@ -6,9 +6,6 @@
     "serve": "vite preview",
     "build": "vite build"
   },
-  "publishConfig": {
-    "registry": "https://npm.registry.github.com/"
-  },
   "dependencies": {
     "vue": "^3.2.6"
   },
