@@ -15,7 +15,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Release
         run: |
-          cd ./src/components/tree
+          cd ./src
           npm version patch
           npm publish
         env:
