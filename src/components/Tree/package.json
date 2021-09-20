@@ -12,8 +12,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/bbzz/tree.git"
+    "url": "https://github.com/bbzz/tree"
   },
+  "homepage": "https://github.com/bbzz/tree",
   "author": "yoja",
   "license": "ISC"
 }
