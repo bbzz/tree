@@ -14,12 +14,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           cd ./src
           cd ./components
           cd ./Tree
           npm version patch
           npm publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
