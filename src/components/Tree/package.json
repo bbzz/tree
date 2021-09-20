@@ -11,7 +11,7 @@
     "tsx"
   ],
   "publishConfig": {
-    "registry": "https://npm.registry.github.com/@nonecp"
+    "registry": "https://npm.registry.github.com"
   },
   "repository": {
     "type": "git",
