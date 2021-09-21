@@ -5,6 +5,7 @@
 - Enter : 当前条目**下方添加相邻**新条目
 - shift + Enter : 当前条目**上方添加相邻**新条目
 - Tab : 添加**子条目**
+- Ctrl + ← : 删除**当前条目**
 - Ctrl + s : 暂存保存到 localStorage （非组件功能）
 
 [上手体验：https://bbzz.github.io/tree](https://bbzz.github.io/tree/)

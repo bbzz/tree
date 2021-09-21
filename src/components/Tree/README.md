@@ -5,6 +5,7 @@ Hot key :
 - Enter
 - shift + Enter
 - Tab
+- Ctrl + ←
 - _Ctrl + s_ （Non-component capabilities）
 
 [Experience：https://bbzz.github.io/tree](https://bbzz.github.io/tree/)

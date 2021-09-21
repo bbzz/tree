@@ -7,6 +7,7 @@ interface ITreeData {
   editTime: number;
   children?: Array<ITreeData>;
 }
+
 const treeNode = defineComponent({
   name: 'Tree',
   props: {
@@ -19,7 +20,7 @@ const treeNode = defineComponent({
       default: 0
     }
   },
-  emits: ['insertSiblingNode'],
+  emits: ['insertSiblingNode', 'deleteCurrentNode'],
   directives: {
     focus: {
       // 指令的定义
@@ -34,8 +35,7 @@ const treeNode = defineComponent({
       if (e.key === 'Enter') {
         const before = e.shiftKey;
         emit('insertSiblingNode', index, before);
-      }
-      if (e.key === 'Tab') {
+      } else if (e.key === 'Tab') {
         (e.target as HTMLInputElement).blur();
         if (!item.children) {
           item.children = [];
@@ -43,11 +43,20 @@ const treeNode = defineComponent({
         item.children.push(gTreeNode());
         e.preventDefault();
         return false;
+      } else if (e.key === 'Backspace' && e.metaKey) {
+        if (item.children?.length) {
+          console.warn('含有子元素不能删除');
+        } else {
+          emit('deleteCurrentNode', index);
+        }
       }
     };
 
     const insertSiblingNode = (index: number, before: boolean) => {
       props.data.children?.splice(before ? index : index + 1, 0, gTreeNode());
+    };
+    const deleteCurrentNode = (index: number) => {
+      props.data.children?.splice(index, 1);
     };
 
     return () => (
@@ -59,7 +68,7 @@ const treeNode = defineComponent({
           <ul class={['leaf', { one: props.data.children.length === 1 }]}>
             {props.data.children?.map((item: ITreeData, index) => (
               <li key={item.id}>
-                <treeNode data={item} index={index} onInsertSiblingNode={insertSiblingNode} />
+                <treeNode data={item} index={index} onInsertSiblingNode={insertSiblingNode} onDeleteCurrentNode={deleteCurrentNode} />
               </li>
             ))}
           </ul>
